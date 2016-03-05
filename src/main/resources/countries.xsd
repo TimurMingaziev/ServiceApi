@@ -35,4 +35,18 @@
             <xs:enumeration value="PLN"/>
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:element name="getListCountryResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="countries" type="tns:listofcountries"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="listofcountries">
+
+            <xs:list itemType="tns:country"/>
+    </xs:simpleType>
+
 </xs:schema>

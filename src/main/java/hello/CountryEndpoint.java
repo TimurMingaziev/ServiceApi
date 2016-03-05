@@ -4,6 +4,7 @@ package hello;
  * Created by Switch on 03.03.2016.
  */
 
+import io.spring.guides.gs_producing_web_service.GetListCountry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -35,4 +36,6 @@ public class CountryEndpoint {
 
         return response;
     }
+
+
 }

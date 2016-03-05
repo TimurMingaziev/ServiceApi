@@ -16,6 +16,7 @@ import org.springframework.util.Assert;
 public class CountryRepository {
     private static final List<Country> countries = new ArrayList<Country>();
 
+
     @PostConstruct
     public void initData() {
         Country spain = new Country();
@@ -55,5 +56,9 @@ public class CountryRepository {
         }
 
         return result;
+    }
+
+    public List<Country> getListCountry() {
+        return countries;
     }
 }

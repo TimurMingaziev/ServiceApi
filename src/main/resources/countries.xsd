@@ -1,41 +1,6 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://spring.io/guides/gs-producing-web-service"
            targetNamespace="http://spring.io/guides/gs-producing-web-service" elementFormDefault="qualified">
 
-    <xs:element name="getCountryRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="name" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="getCountryResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="country" type="tns:country"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:complexType name="country">
-        <xs:sequence>
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="population" type="xs:int"/>
-            <xs:element name="capital" type="xs:string"/>
-            <xs:element name="currency" type="tns:currency"/>
-            <!--<xs:element name="size" type="xs:int"/>-->
-
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:simpleType name="currency">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="GBP"/>
-            <xs:enumeration value="EUR"/>
-            <xs:enumeration value="PLN"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:complexType name="typeMq">
         <xs:sequence>
             <xs:element name="idTypeMq" type="xs:int"/>
@@ -49,6 +14,26 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="measQuants">
+        <xs:sequence>
+            <xs:element name="idMq" type="xs:int"/>
+            <xs:element name="typeMq" type="tns:typeMq"/>
+            <xs:element name="nameMq" type="xs:string"/>
+            <xs:element name="idCH" type="xs:int"/>
+            <xs:element name="taskLevel" type="xs:int"/>
+            <xs:element name="DGDId" type="xs:int"/>
+            <xs:element name="arcPeriod" type="xs:date"/>
+            <xs:element name="calcType" type="xs:int"/>
+            <xs:element name="refChanTq" type="xs:int"/>
+            <xs:element name="lastTs" type="xs:date"/>
+            <xs:element name="lastTs30" type="xs:date"/>
+            <xs:element name="lastTS1" type="xs:date"/>
+            <xs:element name="refDeviceid" type="xs:int"/>
+            <xs:element name="arcType" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--Получаем список типов величин (token, minMquantId, maxMquantId)-->
     <xs:element name="getTypeMQListResponce">
         <xs:complexType>
             <xs:sequence>
@@ -67,12 +52,59 @@
         </xs:complexType>
     </xs:element>
 
-    <!--int idTypeMq;-->
-    <!--String nameTypeMq;-->
-    <!--String nickTq;-->
-    <!--String defaultUnit;-->
-    <!--String caclTpTq;-->
-    <!--String formulaTq;-->
-    <!--int imageIndex;-->
-    <!--int defaultColor;-->
+
+    <!--информация о величине по id (int id)-->
+    <xs:element name="getMQuantInfoByIdResponce">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="mqInfo" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMQuantInfoByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- список величин (token, minMquantId, maxMquantId) -->
+    <xs:element name="getMQuantInfoResponce">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="listMeasQuants" type="tns:measQuants" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMQuantInfoRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="minMqId" type="xs:int"/>
+                <xs:element name="maxMqId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--int максимальная величена (token) -->
+    <xs:element name="getMaxMQuantsIdResponce">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="idMax" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="getMaxMQuantsIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>

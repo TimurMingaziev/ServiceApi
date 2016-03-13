@@ -36,7 +36,7 @@ public class MeasQuants {
     @ManyToOne
     @JoinColumn(name = "QUANT_TYPE")
     public TypeMq getTypeMq() {
-        return typeMq;
+        return (TypeMq) typeMq;
     }
 
     public void setTypeMq(TypeMq typeMq) {

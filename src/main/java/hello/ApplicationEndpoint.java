@@ -18,27 +18,17 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import java.util.List;
 
 @Endpoint //регистрирует класс Spring WS как потенциальный кандидат для обработки входящих SOAP сообщений
-public class CountryEndpoint {
+public class ApplicationEndpoint {
     private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
 
-    private CountryRepository countryRepository;
+    //@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
+    // используется Spring WS для выбора метода
+    // обработчика на основе namespace и localPart сообщения.
 
-    @Autowired
-    public CountryEndpoint(CountryRepository countryRepository) {
-        this.countryRepository = countryRepository;
-    }
+    // @ResponsePayload //указывает на то, что входящее сообщение будет сопоставлено параметру request метода
+    //создает соответствующее значение возвращаемому
+    // значению полезной части ответа.
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest") //используется Spring WS для выбора метода
-                                                               // обработчика на основе namespace и localPart сообщения
-    @ResponsePayload //указывает на то, что входящее сообщение будет сопоставлено параметру request метода
-    public GetCountryResponse getCountry(@RequestPayload GetCountryRequest request)  //создает соответствующее значение возвращаемому
-                                                                                    // значению полезной части ответа.
-    {
-        GetCountryResponse response = new GetCountryResponse();
-        response.setCountry(countryRepository.findCountry(request.getName()));
-
-        return response;
-    }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getTypeMQListRequest")
     @ResponsePayload

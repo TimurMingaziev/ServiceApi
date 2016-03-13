@@ -20,11 +20,12 @@ import java.util.Locale;
 @Repository(value="typeMqDAO")
 public class TypeMqImpl implements TypeMqDAO {
 
-    private SessionFactory sessionFactory;
+//    private SessionFactory sessionFactory;
+    private Session session = null;
 
     @Override
     public List<TypeMq> getInfoAboutAll(String token, int minMqId, int maxMqId) {
-        Session session = null;
+
         List<TypeMq> listTypes = new ArrayList<TypeMq>();
         try {
             Locale.setDefault(Locale.ENGLISH);
@@ -35,22 +36,37 @@ public class TypeMqImpl implements TypeMqDAO {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-        return  listTypes;
+        finally {
+            if(session!=null)
+                session.close();
+        }
+        return listTypes;
     }
 
     @Override
     public TypeMq getInfoById(TypeMq id) {
-
+//        TypeMq typeInfo = null;
+//        try {
+//            Locale.setDefault(Locale.ENGLISH);
+//            session = HibernateUtil.getSessionFactory().openSession();
+//            typeInfo = (TypeMq)session.createQuery("from TypeMq where idTypeMq = id");
+//
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        finally {
+//            if(session!=null)
+//                session.close();
+//        }
         return null;
     }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+//    public SessionFactory getSessionFactory() {
+//        return sessionFactory;
+//    }
+//
+//
+//    public void setSessionFactory(SessionFactory sessionFactory) {
+//        this.sessionFactory = sessionFactory;
+//    }
 }

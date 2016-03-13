@@ -36,17 +36,43 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:element name="getListCountryResponse">
+    <xs:complexType name="typeMq">
+        <xs:sequence>
+            <xs:element name="idTypeMq" type="xs:int"/>
+            <xs:element name="nameTypeMq" type="xs:string"/>
+            <xs:element name="nickTq" type="xs:string"/>
+            <xs:element name="defaultUnit" type="xs:string"/>
+            <xs:element name="caclTpTq" type="xs:string"/>
+            <xs:element name="formulaTq" type="xs:string"/>
+            <xs:element name="imageIndex" type="xs:int"/>
+            <xs:element name="defaultColor" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getTypeMQListResponce">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="countries" type="tns:listofcountries"/>
+                <xs:element name="listTypeMq" type="tns:typeMq" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
 
-    <xs:simpleType name="listofcountries">
+    <xs:element name="getTypeMQListRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="token" type="xs:string"/>
+                <xs:element name="minMqId" type="xs:int"/>
+                <xs:element name="maxMqId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-            <xs:list itemType="tns:country"/>
-    </xs:simpleType>
-
+    <!--int idTypeMq;-->
+    <!--String nameTypeMq;-->
+    <!--String nickTq;-->
+    <!--String defaultUnit;-->
+    <!--String caclTpTq;-->
+    <!--String formulaTq;-->
+    <!--int imageIndex;-->
+    <!--int defaultColor;-->
 </xs:schema>

@@ -22,7 +22,6 @@ public class Application {
 
 //        TypeMqDAO typeMq = new TypeMqImpl();
 //        listTypeMq(typeMq.getInfoAboutAll());
-
     }
 //    private static void listTypeMq(List<TypeMq> typesMq) {
 //        System.out.println("");

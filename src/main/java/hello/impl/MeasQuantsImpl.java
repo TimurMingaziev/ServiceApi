@@ -22,8 +22,8 @@ public class MeasQuantsImpl implements MeasQuantsDAO {
         try {
             Locale.setDefault(Locale.ENGLISH);
             session = HibernateUtil.getSessionFactory().openSession();
+        //    listMeasQuants = session.getNamedQuery("MeasQuants.getAllWhisType").list();
             listMeasQuants = session.createQuery("from MeasQuants").list();
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -40,7 +40,9 @@ public class MeasQuantsImpl implements MeasQuantsDAO {
         try {
             Locale.setDefault(Locale.ENGLISH);
             session = HibernateUtil.getSessionFactory().openSession();
-            mqInfo = (MeasQuants)session.createQuery("from MeasQuants where idMq = id");
+            mqInfo = (MeasQuants)session.getNamedQuery("MeasQuants.getById").setParameter("id",id).uniqueResult();
+
+            //mqInfo = (MeasQuants)session.createQuery("from MeasQuants where idMq = id").uniqueResult();
 
         } catch (Exception ex) {
             ex.printStackTrace();

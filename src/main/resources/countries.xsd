@@ -57,7 +57,7 @@
     <xs:element name="getMQuantInfoByIdResponce">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="mqInfo" type="xs:string"/>
+                <xs:element name="mqInfo" type="tns:measQuants"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

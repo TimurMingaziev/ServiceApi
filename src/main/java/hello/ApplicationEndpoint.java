@@ -4,10 +4,13 @@ package hello;
  * Created by Switch on 03.03.2016.
  */
 
+import hello.DAO.MeasQuantsDAO;
 import hello.DAO.TypeMqDAO;
+import hello.impl.MeasQuantsImpl;
 import hello.impl.TypeMqImpl;
 import hello.model.*;
 import io.spring.guides.gs_producing_web_service.*;
+import io.spring.guides.gs_producing_web_service.MeasQuants;
 import io.spring.guides.gs_producing_web_service.TypeMq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -41,4 +44,24 @@ public class ApplicationEndpoint {
         return responce;
     }
 
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMQuantInfoRequest")
+    @ResponsePayload
+    public GetMQuantInfoResponce getMQuantInfo(@RequestPayload GetMQuantInfoRequest request){
+        GetMQuantInfoResponce responce = new GetMQuantInfoResponce();
+        MeasQuantsDAO measQuantsDAO = new MeasQuantsImpl();
+
+        responce.getListMeasQuants().addAll(measQuantsDAO.getMQuantInfo(request.getToken(),request.getMinMqId(),request.getMaxMqId()));
+        return responce;
+    }
+
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMQuantInfoByIdRequest")
+    @ResponsePayload
+    public  GetMQuantInfoByIdResponce getMQuantInfoById(@RequestPayload GetMQuantInfoByIdRequest request){
+        GetMQuantInfoByIdResponce responce = new GetMQuantInfoByIdResponce();
+        MeasQuantsDAO measQuantsDAO = new MeasQuantsImpl();
+
+        responce.setMqInfo((measQuantsDAO.getMQuantInfoById(request.getId())));
+        return responce ;
+    }
 }

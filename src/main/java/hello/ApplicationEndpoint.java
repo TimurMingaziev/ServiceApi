@@ -12,7 +12,10 @@ import hello.model.*;
 import io.spring.guides.gs_producing_web_service.*;
 import io.spring.guides.gs_producing_web_service.MeasQuants;
 import io.spring.guides.gs_producing_web_service.TypeMq;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -24,6 +27,7 @@ import java.util.List;
 @Endpoint //регистрирует класс Spring WS как потенциальный кандидат для обработки входящих SOAP сообщений
 public class ApplicationEndpoint {
     private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationEndpoint.class);
 
     //@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
     // используется Spring WS для выбора метода
@@ -37,16 +41,27 @@ public class ApplicationEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getTypeMQListRequest")
     @ResponsePayload
     public GetTypeMQListResponce getTypeMQList(@RequestPayload GetTypeMQListRequest request){
-        GetTypeMQListResponce responce = new GetTypeMQListResponce();
-        TypeMqDAO typeMq = new TypeMqImpl();
+        GetTypeMQListResponce responce = null;
+        LOG.info("respons getTypeMQListRequest");
+       // Logger log = LoggerFactory.getLogger(ApplicationEndpoint.class);
+        //log.info("respons getTypeMQListRequest");
+        try {
+            responce = new GetTypeMQListResponce();
+            TypeMqDAO typeMq = new TypeMqImpl();
 
-        responce.getListTypeMq().addAll(typeMq.getInfoAboutAll(request.getToken(),request.getMinMqId(),request.getMaxMqId()));
-        return responce;
+            responce.getListTypeMq().addAll(typeMq.getInfoAboutAll(request.getToken(), request.getMinMqId(), request.getMaxMqId()));
+            LOG.info("success");
+        }
+        catch (Exception ex){LOG.error("Error response");}
+        finally {
+            return responce;
+        }
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMQuantInfoRequest")
     @ResponsePayload
     public GetMQuantInfoResponce getMQuantInfo(@RequestPayload GetMQuantInfoRequest request){
+
         GetMQuantInfoResponce responce = new GetMQuantInfoResponce();
         MeasQuantsDAO measQuantsDAO = new MeasQuantsImpl();
 

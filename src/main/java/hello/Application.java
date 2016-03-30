@@ -6,8 +6,7 @@ package hello;
 import java.util.concurrent.CountDownLatch;
 
 import hello.util.Receiver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.PropertyConfigurator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -26,7 +25,7 @@ import java.util.concurrent.CountDownLatch;
 @ComponentScan
 @EnableAutoConfiguration
 public class Application {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
+
 
 
     @Bean
@@ -61,6 +60,7 @@ public class Application {
     }
 
     public static void main(String[] args) {
+
         SpringApplication.run(Application.class, args);
     }
 

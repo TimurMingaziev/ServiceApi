@@ -73,13 +73,4 @@ public class TypeMqImpl implements TypeMqDAO {
 //        }
         return null;
     }
-
-//    public SessionFactory getSessionFactory() {
-//        return sessionFactory;
-//    }
-//
-//
-//    public void setSessionFactory(SessionFactory sessionFactory) {
-//        this.sessionFactory = sessionFactory;
-//    }
 }

@@ -41,6 +41,7 @@ public class ApplicationEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getTypeMQListRequest")
     @ResponsePayload
     public GetTypeMQListResponce getTypeMQList(@RequestPayload GetTypeMQListRequest request){
+        long timeout= System.currentTimeMillis();
         GetTypeMQListResponce responce = null;
         LOG.info("respons getTypeMQListRequest");
        // Logger log = LoggerFactory.getLogger(ApplicationEndpoint.class);
@@ -54,6 +55,8 @@ public class ApplicationEndpoint {
         }
         catch (Exception ex){LOG.error("Error response");}
         finally {
+            LOG.info("getTypeMQListRequest finished for "
+                    + Long.toString(System.currentTimeMillis() - timeout) + " millisecond(s)");
             return responce;
         }
     }

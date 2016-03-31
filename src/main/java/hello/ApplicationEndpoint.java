@@ -27,7 +27,7 @@ import java.util.List;
 @Endpoint //регистрирует класс Spring WS как потенциальный кандидат для обработки входящих SOAP сообщений
 public class ApplicationEndpoint {
     private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
-    private static final Logger LOG = LoggerFactory.getLogger(ApplicationEndpoint.class);
+    private static final Logger LOG = LoggerFactory.getLogger("logfile");
 
     //@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
     // используется Spring WS для выбора метода
